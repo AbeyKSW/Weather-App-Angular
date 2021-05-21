@@ -1,0 +1,68 @@
+<div class=" background">
+    <div class="justify-content-center mt-4">
+        <div class="col-md-12 col-lg-12">
+            <div layout="row" layout-align="center center">
+                <div class="logo-container">
+                    <img class="logo" src="/assets/images/Logo.png">
+                </div>
+
+                <div class="form-container">
+                    <form [formGroup]="cityForm" class="form-validate" role="form" name="cityForm" novalidate="">
+
+                        <div class="input-group with-focus">
+                            <input class="form-control rounded" id="city" type="text" name="city"
+                                placeholder="Enter a city" formControlName="city" />
+                            <button class="rounded" (click)="btnAddCity(cityForm.value)">Add City</button>
+                        </div>
+                    </form>
+                </div>
+
+                <mat-card class="weather-card" *ngFor="let weather of weather_data_list">
+                    <mat-card-header>
+
+                        <div class="flex-row">
+                            <div class="general">
+                                <mat-card-title>
+                                    <h2>{{weather.city}}</h2>
+                                </mat-card-title>
+                                <mat-card-subtitle class="subtitle">{{weather.date_time}}</mat-card-subtitle>
+                                <img class="general-logo" src={{weather.weather_icon}} />
+                                <span>{{weather.weather_main}}</span>
+                            </div>
+
+                            <div class="temp">
+                                <span class="big-temp">{{weather.temp}}° C</span>
+                                <span class="small-temp">Temp Min: {{weather.temp_min}}° C</span>
+                                <span class="small-temp">Temp Max: {{weather.temp_max}}° C</span>
+                            </div>
+
+                        </div>
+                    </mat-card-header>
+
+                    <mat-card-content class="weather-card-content">
+                        <div class="content-row">
+                            <div class="left-content">
+                                <span class="small-text">Preasure: {{weather.pressure}}hPa</span>
+                                <span class="small-text">Humidity: {{weather.humidity}}%</span>
+                                <span class="small-text">Visibility: {{weather.visibility}}km</span>
+                            </div>
+                            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+                            <div class="center-content">
+                                <fa-icon [icon]="faPaperPlane"></fa-icon>
+                                <span>{{weather.wind_speed}}m/s&nbsp;{{weather.wind_deg}} Degree</span>
+                            </div>
+                            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+                            <div class="right-content">
+                                <span class="small-text">Sunrise: {{weather.sunrise}}</span>
+                                <span class="small-text">Sunset: {{weather.sunset}}</span>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="footer">
+
+</div> -->

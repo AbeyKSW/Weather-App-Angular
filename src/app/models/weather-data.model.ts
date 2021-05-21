@@ -1,0 +1,21 @@
+export class WeatherData {
+    id: number = 0;
+    date_time: string = "";
+    city: string = "";
+    dt: number = 0;
+    clouds: string = "";
+    visibility: number = 0;
+    wind_speed: number = 0;
+    wind_deg: number = 0;
+    temp: number = 0;
+    pressure: number = 0;
+    humidity: number = 0;
+    temp_min: number = 0;
+    temp_max: number = 0;
+    weather_main: string = "";
+    weather_description: string = "";
+    weather_icon: string = "";
+    country: string = "";
+    sunrise: string = "";
+    sunset: string = "";
+}

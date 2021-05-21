@@ -1,0 +1,46 @@
+<div class="bg-gray-lighter">
+
+  <div class="card card-default col-md-12 col-lg-12">
+    <div class="card-header">
+      <fa-icon class="arrow" [icon]="faArrowLeft" (click)="btnClose()"></fa-icon>
+    </div>
+    <div class="card-body">
+      <div class="col-md-12 col-lg-12">
+        <div class="header">
+          <h2>{{weather_data.city}}</h2>
+          <p class="subtitle">{{weather_data.date_time}}</p>
+          <div class="flex-row">
+            <div class="general">
+              <img class="general-logo" src={{weather_data.weather_icon}} />
+              <span>{{weather_data.weather_main}}</span>
+            </div>
+            <div class="temp">
+              <span class="big-temp">{{weather_data.temp}}° C</span>
+              <span class="small-temp">Temp Min: {{weather_data.temp_min}}° C</span>
+              <span class="small-temp">Temp Max: {{weather_data.temp_max}}° C</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="content-row">
+            <div class="left-content">
+              <span class="small-text">Preasure: {{weather_data.pressure}}hPa</span>
+              <span class="small-text">Humidity: {{weather_data.humidity}}%</span>
+              <span class="small-text">Visibility: {{weather_data.visibility}}km</span>
+            </div>
+            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+            <div class="center-content">
+              <fa-icon [icon]="faPaperPlane"></fa-icon>
+              <span>{{weather_data.wind_speed}}m/s&nbsp;{{weather_data.wind_deg}} Degree</span>
+            </div>
+            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+            <div class="right-content">
+              <span class="small-text">Sunrise: {{weather_data.sunrise}}</span>
+              <span class="small-text">Sunset: {{weather_data.sunset}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
