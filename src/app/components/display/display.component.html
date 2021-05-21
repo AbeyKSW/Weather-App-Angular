@@ -14,6 +14,7 @@
               <img class="general-logo" src={{weather_data.weather_icon}} />
               <span>{{weather_data.weather_main}}</span>
             </div>
+            <mat-divider class="divider" [vertical]="true"></mat-divider>
             <div class="temp">
               <span class="big-temp">{{weather_data.temp}}° C</span>
               <span class="small-temp">Temp Min: {{weather_data.temp_min}}° C</span>
@@ -28,12 +29,12 @@
               <span class="small-text">Humidity: {{weather_data.humidity}}%</span>
               <span class="small-text">Visibility: {{weather_data.visibility}}km</span>
             </div>
-            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+            <mat-divider class="divider" [vertical]="true"></mat-divider>
             <div class="center-content">
               <fa-icon [icon]="faPaperPlane"></fa-icon>
               <span>{{weather_data.wind_speed}}m/s&nbsp;{{weather_data.wind_deg}} Degree</span>
             </div>
-            <!-- <mat-divider class="divider" [vertical]="true"></mat-divider> -->
+            <mat-divider class="divider" [vertical]="true"></mat-divider>
             <div class="right-content">
               <span class="small-text">Sunrise: {{weather_data.sunrise}}</span>
               <span class="small-text">Sunset: {{weather_data.sunset}}</span>
