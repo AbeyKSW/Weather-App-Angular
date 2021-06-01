@@ -2,23 +2,23 @@ import { formatDate } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WeatherData } from 'src/app/models/weather-data.model';
-import { WeatherDataService } from 'src/app/services/weather-data.service';
+import { WeatherService } from 'src/app/services/weather.service';
 import { faPaperPlane, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-display',
-  templateUrl: './display.component.html',
-  styleUrls: ['./display.component.scss']
+  selector: 'app-weather-city',
+  templateUrl: './weather-city.component.html',
+  styleUrls: ['./weather-city.component.scss']
 })
-export class DisplayComponent implements OnInit {
+export class WeatherCityComponent implements OnInit {
 
   weather_data: WeatherData = new WeatherData();
   faPaperPlane = faPaperPlane;
   faArrowLeft = faArrowLeft;
 
   constructor(
-    private weather_data_service: WeatherDataService,
-    public dialogRef: MatDialogRef<DisplayComponent>,
+    private weather_data_service: WeatherService,
+    public dialogRef: MatDialogRef<WeatherCityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     dialogRef.disableClose = true;

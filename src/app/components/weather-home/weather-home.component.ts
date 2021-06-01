@@ -1,55 +1,62 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { CityData } from 'src/app/models/city-data.model';
 import { WeatherData } from 'src/app/models/weather-data.model';
-import { WeatherDataService } from 'src/app/services/weather-data.service';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { DisplayComponent } from '../display/display.component';
+import { WeatherService } from 'src/app/services/weather.service';
+import cityData from '../../../assets/systemData/cities.json';
+import { environment } from '../../../environments/environment';
+import { WeatherCityComponent } from '../weather-city/weather-city.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-weather-home',
+  templateUrl: './weather-home.component.html',
+  styleUrls: ['./weather-home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class WeatherHomeComponent implements OnInit {
 
   cityForm: FormGroup;
-  cities: any[] = [
-    { "CityCode": "1248991", "CityName": "Colombo", "Temp": "33.0", "Status": "Clouds" },
-    { "CityCode": "1850147", "CityName": "Tokyo", "Temp": "8.6", "Status": "Clear" },
-    { "CityCode": "2644210", "CityName": "Liverpool", "Temp": "16.5", "Status": "Rain" },
-    { "CityCode": "2988507", "CityName": "Paris", "Temp": "22.4", "Status": "Clear" },
-    { "CityCode": "2147714", "CityName": "Sydney", "Temp": "27.3", "Status": "Rain" },
-    { "CityCode": "4930956", "CityName": "Boston", "Temp": "4.2", "Status": "Mist" },
-    { "CityCode": "1796236", "CityName": "Shanghai", "Temp": "10.1", "Status": "Clouds" },
-    { "CityCode": "3143244", "CityName": "Oslo", "Temp": "-3.9", "Status": "Clear" }
-  ];
+  cities: CityData[] = [];
   weather_data_list: WeatherData[] = [];
-  weather_data: WeatherData = new WeatherData();
-  faPaperPlane = faPaperPlane;
 
   constructor(
     fb: FormBuilder,
     private dialog: MatDialog,
-    private weather_data_service: WeatherDataService) {
+    private weather_service: WeatherService
+  ) {
+    console.log("Weather App API", environment.weatherAPIKey);
 
     this.cityForm = fb.group({
       'city': new FormControl(null),
     });
 
-    this.loadData();
+    this.loadCities();
   }
 
-  ngOnInit(): void {
+  loadCities() {
+    // this.cities = cityData;
+    var cityArr = cityData.List;
+    for (var i = 0; i < cityArr.length; i++) {
+      var city = new CityData();
+      city.cityCode = Number(cityArr[i].CityCode);
+      city.cityName = cityArr[i].CityName;
+      city.temp = cityArr[i].Temp;
+      city.status = cityArr[i].Status;
 
+      this.cities.push(city);
+    }
+
+    if (this.cities.length > 0) {
+      this.loadData();
+    }
   }
 
   loadData() {
-    var city_ids = this.cities.map(({ CityCode }) => CityCode);
-    this.weather_data_service.getWeatherData(city_ids).subscribe((response: any) => {
+    var city_ids = this.cities.map(({ cityCode }) => cityCode);
+    this.weather_service.getWeatherData(city_ids).subscribe((response: any) => {
       var data = response.list;
+      console.log("City Data Set", data);
       data.forEach((element: any) => {
         var date = new Date();
         var time = formatDate(date, 'hh:mm a', 'en-US');
@@ -86,8 +93,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  ngOnInit(): void {
+  }
+
   btnAddCity(data: any) {
     console.log("Form Data", data);
-    const dialogRef = this.dialog.open(DisplayComponent, { width: '40%', data: data.city, disableClose: true });
+    const dialogRef = this.dialog.open(WeatherCityComponent, { width: '40%', data: data.city, disableClose: true });
   }
 }

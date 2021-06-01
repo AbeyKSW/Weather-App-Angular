@@ -1,0 +1,25 @@
+<div class="container">
+
+    <div class="justify-content-center mt-4">
+        <div class="col-md-12 col-lg-12">
+            <div layout="row" layout-align="center center">
+                <div class="logo-container">
+                    <img class="logo" src="../../../assets/systemImages/logo_001.png">
+                </div>
+
+                <div class="form-container">
+                    <form [formGroup]="cityForm" class="form-validate" role="form" name="cityForm" novalidate="">
+
+                        <div class="input-group with-focus">
+                            <input class="form-control rounded" id="city" type="text" name="city"
+                                placeholder="Enter a city" formControlName="city" />
+                            <button class="overlay-btn rounded" (click)="btnAddCity(cityForm.value)">Add City</button>
+                        </div>
+                    </form>
+                </div>
+
+                <app-weather-card [weather_data_list]="this.weather_data_list"></app-weather-card>
+            </div>
+        </div>
+    </div>
+</div>
