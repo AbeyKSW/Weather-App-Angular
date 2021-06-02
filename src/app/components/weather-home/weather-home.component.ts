@@ -52,7 +52,7 @@ export class WeatherHomeComponent implements OnInit {
 
   loadData() {
     var city_ids = this.cities.map(({ cityCode }) => cityCode);
-    city_ids = [];
+    // city_ids = []; // -- Just to create an error
     this.weather_service.getWeatherData(city_ids)
       .subscribe(
         (response: any) => {

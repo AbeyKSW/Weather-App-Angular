@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WeatherData } from 'src/app/models/weather-data.model';
 import { WeatherService } from 'src/app/services/weather.service';
 import { faPaperPlane, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-weather-city',
@@ -27,41 +28,48 @@ export class WeatherCityComponent implements OnInit {
 
   loadData(city_name: String) {
     if (city_name != null) {
-      this.weather_data_service.getWeatherByCity(city_name).subscribe((response: any) => {
-        console.log("Response", response);
-        var data = response;
+      this.weather_data_service.getWeatherByCityNew(city_name)
+        .subscribe(
+          (response: any) => {
+            console.log("Response", response);
+            var data = response;
 
-        var date = new Date();
-        var time = formatDate(date, 'hh:mm a', 'en-US');
-        var dateOnly = formatDate(date, 'MMM dd', 'en-US');
+            var date = new Date();
+            var time = formatDate(date, 'hh:mm a', 'en-US');
+            var dateOnly = formatDate(date, 'MMM dd', 'en-US');
 
-        var weather_data = new WeatherData();
-        weather_data.city = data.name + ", " + data.sys.country;
-        weather_data.date_time = time + ", " + dateOnly;
+            var weather_data = new WeatherData();
+            weather_data.city = data.name + ", " + data.sys.country;
+            weather_data.date_time = time + ", " + dateOnly;
 
-        weather_data.weather_main = data.weather[0].main;
-        weather_data.weather_description = data.weather[0].description;
-        weather_data.weather_icon = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+            weather_data.weather_main = data.weather[0].main;
+            weather_data.weather_description = data.weather[0].description;
+            weather_data.weather_icon = 'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
 
-        weather_data.temp = data.main.temp;
-        weather_data.temp_min = data.main.temp_min;
-        weather_data.temp_max = data.main.temp_max;
+            weather_data.temp = data.main.temp;
+            weather_data.temp_min = data.main.temp_min;
+            weather_data.temp_max = data.main.temp_max;
 
-        weather_data.pressure = data.main.pressure;
-        weather_data.humidity = data.main.humidity;
-        weather_data.visibility = data.visibility;
+            weather_data.pressure = data.main.pressure;
+            weather_data.humidity = data.main.humidity;
+            weather_data.visibility = data.visibility;
 
-        weather_data.wind_speed = data.wind.speed;
-        weather_data.wind_deg = data.wind.degree;
+            weather_data.wind_speed = data.wind.speed;
+            weather_data.wind_deg = data.wind.degree;
 
-        var sunrise = new Date(data.sys.sunrise * 1000);
-        weather_data.sunrise = formatDate(sunrise, 'hh:mm a', 'en-US');
+            var sunrise = new Date(data.sys.sunrise * 1000);
+            weather_data.sunrise = formatDate(sunrise, 'hh:mm a', 'en-US');
 
-        var sunset = new Date(data.sys.sunset * 1000);
-        weather_data.sunset = formatDate(sunset, 'hh:mm a', 'en-US');
+            var sunset = new Date(data.sys.sunset * 1000);
+            weather_data.sunset = formatDate(sunset, 'hh:mm a', 'en-US');
 
-        this.weather_data = weather_data;
-      })
+            this.weather_data = weather_data;
+          },
+          (error: any) => {
+            console.error('There is an error while retrieving the data', error);
+            Swal.fire('Ops!', 'Something went wrong!', 'error');
+          }
+        )
     }
   }
 
