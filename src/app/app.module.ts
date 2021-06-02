@@ -17,6 +17,7 @@ import { WeatherHomeComponent } from './components/weather-home/weather-home.com
 import { WeatherCityComponent } from './components/weather-city/weather-city.component';
 import { HttpInterceptorService } from 'http-Interceptor.service';
 import { ErrorHandlerService } from 'error-handler.service';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ErrorHandlerService } from 'error-handler.service';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDividerModule
+    MatDividerModule,
+    FlexLayoutModule
   ],
   providers: [
     WeatherService,

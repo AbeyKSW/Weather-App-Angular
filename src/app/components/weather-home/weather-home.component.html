@@ -4,7 +4,7 @@
         <div class="col-md-12 col-lg-12">
             <div layout="row" layout-align="center center">
                 <div class="logo-container">
-                    <img class="logo" src="../../../assets/systemImages/logo_001.png">
+                    <img class="logo" src="../../../assets/systemImages/logo_001.png" alt="" />
                 </div>
 
                 <div class="form-container">
@@ -18,7 +18,9 @@
                     </form>
                 </div>
 
-                <app-weather-card [weather_data_list]="this.weather_data_list"></app-weather-card>
+                <div class="card-container">
+                    <app-weather-card [weather_data_list]="this.weather_data_list"></app-weather-card>
+                </div>
             </div>
         </div>
     </div>
