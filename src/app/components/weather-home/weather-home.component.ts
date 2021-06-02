@@ -25,8 +25,6 @@ export class WeatherHomeComponent implements OnInit {
     private dialog: MatDialog,
     private weather_service: WeatherService
   ) {
-    console.log("Weather App API", environment.weatherAPIKey);
-
     this.cityForm = fb.group({
       'city': new FormControl(null),
     });

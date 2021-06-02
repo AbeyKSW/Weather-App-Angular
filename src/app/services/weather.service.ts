@@ -7,7 +7,7 @@ import { of, throwError } from 'rxjs';
 
 let serviceUrl: String = 'http://api.openweathermap.org/data/2.5/group';
 let cityServiceUrl: String = 'http://api.openweathermap.org/data/2.5/weather';
-let apiKey: String = environment.weatherAPIKey;
+let apiKey: String = environment.API_URL;
 
 @Injectable({
   providedIn: 'root'
