@@ -28,10 +28,10 @@ export class WeatherCityComponent implements OnInit {
 
   loadData(city_name: String) {
     if (city_name != null) {
-      this.weather_data_service.getWeatherByCityNew(city_name)
+      this.weather_data_service.getWeatherByCity(city_name)
         .subscribe(
           (response: any) => {
-            console.log("Response", response);
+            // console.log("Response", response);
             var data = response;
 
             var date = new Date();
