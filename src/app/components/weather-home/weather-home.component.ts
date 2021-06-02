@@ -52,43 +52,50 @@ export class WeatherHomeComponent implements OnInit {
 
   loadData() {
     var city_ids = this.cities.map(({ cityCode }) => cityCode);
-    this.weather_service.getWeatherData(city_ids).subscribe((response: any) => {
-      var data = response.list;
-      console.log("City Data Set", data);
-      data.forEach((element: any) => {
-        var date = new Date();
-        var time = formatDate(date, 'hh:mm a', 'en-US');
-        var dateOnly = formatDate(date, 'MMM dd', 'en-US');
+    city_ids = [];
+    this.weather_service.getWeatherData(city_ids)
+      .subscribe(
+        (response: any) => {
+          var data = response.list;
+          console.log("City Data Set", data);
+          data.forEach((element: any) => {
+            var date = new Date();
+            var time = formatDate(date, 'hh:mm a', 'en-US');
+            var dateOnly = formatDate(date, 'MMM dd', 'en-US');
 
-        var weather_data = new WeatherData();
-        weather_data.city = element.name + ", " + element.sys.country;
-        weather_data.date_time = time + ", " + dateOnly;
+            var weather_data = new WeatherData();
+            weather_data.city = element.name + ", " + element.sys.country;
+            weather_data.date_time = time + ", " + dateOnly;
 
-        weather_data.weather_main = element.weather[0].main;
-        weather_data.weather_description = element.weather[0].description;
-        weather_data.weather_icon = 'http://openweathermap.org/img/w/' + element.weather[0].icon + '.png';
+            weather_data.weather_main = element.weather[0].main;
+            weather_data.weather_description = element.weather[0].description;
+            weather_data.weather_icon = 'http://openweathermap.org/img/w/' + element.weather[0].icon + '.png';
 
-        weather_data.temp = element.main.temp;
-        weather_data.temp_min = element.main.temp_min;
-        weather_data.temp_max = element.main.temp_max;
+            weather_data.temp = element.main.temp;
+            weather_data.temp_min = element.main.temp_min;
+            weather_data.temp_max = element.main.temp_max;
 
-        weather_data.pressure = element.main.pressure;
-        weather_data.humidity = element.main.humidity;
-        weather_data.visibility = element.visibility;
+            weather_data.pressure = element.main.pressure;
+            weather_data.humidity = element.main.humidity;
+            weather_data.visibility = element.visibility;
 
-        weather_data.wind_speed = element.wind.speed;
-        weather_data.wind_deg = element.wind.degree;
+            weather_data.wind_speed = element.wind.speed;
+            weather_data.wind_deg = element.wind.degree;
 
-        var sunrise = new Date(element.sys.sunrise * 1000);
-        weather_data.sunrise = formatDate(sunrise, 'hh:mm a', 'en-US');
+            var sunrise = new Date(element.sys.sunrise * 1000);
+            weather_data.sunrise = formatDate(sunrise, 'hh:mm a', 'en-US');
 
-        var sunset = new Date(element.sys.sunset * 1000);
-        weather_data.sunset = formatDate(sunset, 'hh:mm a', 'en-US');
+            var sunset = new Date(element.sys.sunset * 1000);
+            weather_data.sunset = formatDate(sunset, 'hh:mm a', 'en-US');
 
-        this.weather_data_list.push(weather_data);
-      });
+            this.weather_data_list.push(weather_data);
+          });
 
-    })
+        },
+        (error) => {
+          console.error('There is an error while retrieving the data', error);
+        }
+      )
   }
 
   ngOnInit(): void {

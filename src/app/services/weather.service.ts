@@ -25,28 +25,19 @@ export class WeatherService {
 
     // return this.http.get(serviceUrl + '?id=' + city_ids + '&units=metric' + '&APPID=' + apiKey);
     var apiUrl = serviceUrl + '?id=' + city_ids + '&units=metric' + '&APPID=' + apiKey;
-    const http$ = this.http.get(apiUrl);
+    const http$ = this.http.get<any>(apiUrl);
+
+    http$
+      .pipe(
+        catchError((err) => {
+          console.log('error caught in service - ', err)
+          console.error(err);
+          return throwError(err);
+        })
+      )
+
     return http$;
 
-    // http$
-    //   .pipe(
-    //     map(res => res['payload']),
-    //     catchError(err => {
-    //       console.log('caught mapping error and rethrowing', err);
-    //       return throwError(err);
-    //     }),
-    //     finalize(() => console.log("first finalize() block executed")),
-    //     catchError(err => {
-    //       console.log('caught rethrown error, providing fallback value');
-    //       return of([]);
-    //     }),
-    //     finalize(() => console.log("second finalize() block executed"))
-    //   )
-    //   .subscribe(
-    //     res => console.log('HTTP response', res),
-    //     err => console.log('HTTP Error', err),
-    //     () => console.log('HTTP request completed.')
-    //   );
   }
 
   // Clear configs

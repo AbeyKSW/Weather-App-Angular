@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WeatherService } from './services/weather.service';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -15,6 +15,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { WeatherCardComponent } from './components/weather-card/weather-card.component';
 import { WeatherHomeComponent } from './components/weather-home/weather-home.component';
 import { WeatherCityComponent } from './components/weather-city/weather-city.component';
+import { HttpInterceptorService } from 'http-Interceptor.service';
+import { ErrorHandlerService } from 'error-handler.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,11 @@ import { WeatherCityComponent } from './components/weather-city/weather-city.com
     ReactiveFormsModule,
     MatDividerModule
   ],
-  providers: [WeatherService],
+  providers: [
+    WeatherService,
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: ErrorHandler, useClass:ErrorHandlerService}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
