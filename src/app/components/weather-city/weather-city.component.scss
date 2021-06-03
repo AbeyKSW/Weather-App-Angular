@@ -13,6 +13,7 @@
 
 .header {
     text-align: center;
+    color: white;
     background-color: #388ee7;
 }
 
@@ -54,7 +55,7 @@
 
     > .general {
         width: 100%;
-        color: black;
+        color: white;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -69,8 +70,7 @@
 
     > .temp {
         width: 100%;
-        // background: lightblue;
-        color: black;
+        color: white;
         margin-left: 10px;
         display: flex;
         flex-direction: column;
