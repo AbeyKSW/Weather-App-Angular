@@ -4,17 +4,16 @@
 
 .card {
     padding: 0px;
-    background-color: lightblue;
-    background-image: url("../../../assets/systemImages/cloud_bg_001.png");
+    background-color: #388ee7;
 }
 
 .card-header {
-    background-color: lightblue;
+    background-color: #388ee7;
 }
 
 .header {
     text-align: center;
-    background-color: lightblue;
+    background-color: #388ee7;
 }
 
 .arrow {
@@ -32,9 +31,20 @@
     text-align: center;
 }
 
+.close-icon {
+    color: white;
+    padding-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.fa-arrow-left-thin:before {
+    content: "\f060";
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
+    padding: 5%;
 
     > div {
         // flex: 50%;
@@ -48,7 +58,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        display: grid;
         // background: rgba(0, 0, 0, 0.1);
+    }
+
+    .general-logo {
+        padding: 0px;
+        width: 50px;
     }
 
     > .temp {
@@ -73,8 +89,8 @@
 
 .content-row {
     display: flex;
-    // flex-direction: row;
-    background-color: #373b47;
+    padding: 5%;
+    background-color: #383b47;
     color: white;
 
     > .left-content {

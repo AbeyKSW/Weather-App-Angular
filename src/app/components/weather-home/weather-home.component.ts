@@ -1,5 +1,5 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CityData } from 'src/app/models/city-data.model';
 import { WeatherData } from 'src/app/models/weather-data.model';
@@ -12,7 +12,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 @Component({
   selector: 'app-weather-home',
   templateUrl: './weather-home.component.html',
-  styleUrls: ['./weather-home.component.scss']
+  styleUrls: ['./weather-home.component.scss'],
+  encapsulation: ViewEncapsulation.None 
 })
 export class WeatherHomeComponent implements OnInit {
 

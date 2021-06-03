@@ -5,7 +5,7 @@
     // box-shadow: 0 0 2rem rgba(0, 0, 255, 0.1);
     // justify-items: center;
     padding: 0rem;
-    margin: 3rem;
+    // margin: 3rem;
     width: 21rem;
     height: 10rem;
     cursor: pointer;
@@ -44,55 +44,58 @@
 //     background-color: #000000;
 // }
 
-.divider {
-    color: #fafbfc;
-    height: 100%;
-    width: 0px !important;
-    position: inherit !important;
-    border-top-width: 0;
-    border-right-width: 1px;
-    border-right-style: solid;
-}
+// .divider {
+//     color: #fafbfc;
+//     height: 100%;
+//     width: 0px !important;
+//     position: inherit !important;
+//     border-top-width: 0;
+//     border-right-width: 1px;
+//     border-right-style: solid;
+// }
 
 .content-row {
     display: flex;
     flex-direction: row;
-    background-color: #373b47;
+    background-color: #383B47;
     color: white;
     text-align: center;
     width: 21rem;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-    // margin-top: 1.5rem;
+    // padding: 0.5rem;
 
     > .left-content {
-        margin: 5px;
+        // margin: 5px;
         display: flex;
         flex-direction: column;
         justify-content: left;
         align-items: left;
         text-align: left;
+        padding: 2%;
     }
 
     > .right-content {
-        margin-top: 5px;
-        margin-left: 5px;
-        margin-bottom: 5px;
-        margin-right: 0px;
+        // margin-top: 5px;
+        // margin-left: 5px;
+        // margin-bottom: 5px;
+        // margin-right: 0px;
         display: flex;
         flex-direction: column;
         justify-content: right;
         align-items: right;
         text-align: right;
+        padding: 2%;
     }
 
     > .center-content {
-        margin: 5px;
+        // margin: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
+        padding: 2%;
     }
 
     .small-text {
@@ -122,7 +125,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        display: flex;
+        display: grid;
     }
 
     .general-logo {
@@ -152,11 +155,11 @@
     }
 
     .big-temp {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .small-temp {
-        font-size: 10px;
+        font-size: 9px;
     }
 }
 

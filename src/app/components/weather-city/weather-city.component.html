@@ -2,7 +2,7 @@
 
   <div class="card card-default col-md-12 col-lg-12">
     <div class="card-header">
-      <i class="fa fa-arrow-left" aria-hidden="true" (click)="btnClose()"></i>
+      <i class="close-icon fa fa-arrow-left-thin" aria-hidden="true" (click)="btnClose()"></i>
     </div>
     <div class="card-body">
       <div class="col-md-12 col-lg-12">
@@ -11,7 +11,7 @@
           <p class="subtitle">{{weather_data.date_time}}</p>
           <div class="flex-row">
             <div class="general">
-              <img class="general-logo" src={{weather_data.weather_icon}} />
+              <span><img class="general-logo" src={{weather_data.weather_icon}} /></span>
               <span>{{weather_data.weather_main}}</span>
             </div>
             <mat-divider class="divider" [vertical]="true"></mat-divider>
@@ -31,7 +31,7 @@
             </div>
             <mat-divider class="divider" [vertical]="true"></mat-divider>
             <div class="center-content">
-              <i class="fa fa-papre-plane" aria-hidden="true"></i>
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
               <span>{{weather_data.wind_speed}}m/s&nbsp;{{weather_data.wind_deg}} Degree</span>
             </div>
             <mat-divider class="divider" [vertical]="true"></mat-divider>
