@@ -18,13 +18,15 @@ import { WeatherCityComponent } from './components/weather-city/weather-city.com
 import { HttpInterceptorService } from 'http-Interceptor.service';
 import { ErrorHandlerService } from 'error-handler.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { RandomColorDirective } from './directives/random-color.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherHomeComponent,
     WeatherCityComponent,
-    WeatherCardComponent
+    WeatherCardComponent,
+    RandomColorDirective
   ],
   imports: [
     BrowserModule,
