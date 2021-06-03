@@ -1,7 +1,18 @@
 .container {
-    height: 920px;
+    height: 1000px;
     color: white;
+    background-color: #1F2128;
+    background-repeat: no-repeat;
     background-image: url("../../../assets/systemImages/background_001.png");
+}
+
+.custom-input{
+    color: white;
+    height: 25px;
+    width: 200px;
+    border-color: #191B20;
+    border-radius: 0.5rem;
+    background-color: #191B20;
 }
 
 .logo-container {
@@ -20,6 +31,10 @@
 }
 
 .overlay-btn {
+    background-color: #4F449A;
+    border-color: #4F449A;
+    height: 30px;
+    border-radius: 0.5rem;
     margin-left: -2%;
 }
 
