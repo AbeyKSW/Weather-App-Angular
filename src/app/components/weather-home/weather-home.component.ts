@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { CityData } from 'src/app/models/city-data.model';
 import { WeatherData } from 'src/app/models/weather-data.model';
 import { WeatherService } from 'src/app/services/weather.service';
-import cityData from '../../../assets/systemData/cities.json';
+import CityLog from '../../../assets/systemData/cities.json';
 import { environment } from '../../../environments/environment';
 import { WeatherCityComponent } from '../weather-city/weather-city.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,11 +13,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   selector: 'app-weather-home',
   templateUrl: './weather-home.component.html',
   styleUrls: ['./weather-home.component.scss'],
-  encapsulation: ViewEncapsulation.None 
+  encapsulation: ViewEncapsulation.None
 })
 export class WeatherHomeComponent implements OnInit {
 
-  cityForm: FormGroup;
+  city_form: FormGroup;
   cities: CityData[] = [];
   weather_data_list: WeatherData[] = [];
 
@@ -26,7 +26,7 @@ export class WeatherHomeComponent implements OnInit {
     private dialog: MatDialog,
     private weather_service: WeatherService
   ) {
-    this.cityForm = fb.group({
+    this.city_form = fb.group({
       'city': new FormControl(null),
     });
 
@@ -34,14 +34,13 @@ export class WeatherHomeComponent implements OnInit {
   }
 
   loadCities() {
-    // this.cities = cityData;
-    var cityArr = cityData.List;
-    for (var i = 0; i < cityArr.length; i++) {
+    var city_arr = CityLog.List;
+    for (var i = 0; i < city_arr.length; i++) {
       var city = new CityData();
-      city.cityCode = Number(cityArr[i].CityCode);
-      city.cityName = cityArr[i].CityName;
-      city.temp = cityArr[i].Temp;
-      city.status = cityArr[i].Status;
+      city.cityCode = Number(city_arr[i].CityCode);
+      city.cityName = city_arr[i].CityName;
+      city.temp = city_arr[i].Temp;
+      city.status = city_arr[i].Status;
 
       this.cities.push(city);
     }
@@ -93,7 +92,7 @@ export class WeatherHomeComponent implements OnInit {
           });
 
         },
-        (error) => {
+        (error: any) => {
           console.error('There is an error while retrieving the data', error);
         }
       )

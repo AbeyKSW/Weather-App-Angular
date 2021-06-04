@@ -5,7 +5,9 @@ import Swal from 'sweetalert2';
 @Injectable()
 export class ErrorHandlerService implements ErrorHandler {
 
-    constructor() { }
+    constructor() {
+        console.log("Successfully went through error handling");
+    }
 
     handleError(error: Error | HttpErrorResponse) {
         console.log('This error is came from Globle Error Handling');

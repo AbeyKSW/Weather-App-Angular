@@ -14,15 +14,13 @@ import Swal from 'sweetalert2';
 export class WeatherCityComponent implements OnInit {
 
   weather_data: WeatherData = new WeatherData();
-  faPaperPlane = faPaperPlane;
-  faArrowLeft = faArrowLeft;
 
   constructor(
     private weather_data_service: WeatherService,
-    public dialogRef: MatDialogRef<WeatherCityComponent>,
+    public dialog_ref: MatDialogRef<WeatherCityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
-    dialogRef.disableClose = true;
+    dialog_ref.disableClose = true;
     this.loadData(data);
   }
 
@@ -77,7 +75,7 @@ export class WeatherCityComponent implements OnInit {
   }
 
   btnClose() {
-    this.dialogRef.close();
+    this.dialog_ref.close();
   }
 
 }

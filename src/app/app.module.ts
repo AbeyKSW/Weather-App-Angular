@@ -19,6 +19,8 @@ import { HttpInterceptorService } from 'http-Interceptor.service';
 import { ErrorHandlerService } from 'error-handler.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RandomColorDirective } from './directives/random-color.directive';
+import { CacheService } from './services/cache.service';
+import { CacheInterceptorService } from 'cache-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { RandomColorDirective } from './directives/random-color.directive';
   ],
   providers: [
     WeatherService,
+    CacheService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptorService, multi: true },
     { provide: ErrorHandler, useClass:ErrorHandlerService}
   ],
   bootstrap: [AppComponent]

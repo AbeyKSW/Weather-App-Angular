@@ -7,12 +7,12 @@
                 </div>
 
                 <div class="form-container">
-                    <form [formGroup]="cityForm" class="form-validate" role="form" name="cityForm" novalidate="">
+                    <form [formGroup]="city_form" class="form-validate" role="form" name="city_form" novalidate="">
 
                         <div class="input-group with-focus">
                             <input class="form-control rounded custom-input" id="city" type="text" name="city"
                                 placeholder="Enter a city" formControlName="city" />
-                            <button class="overlay-btn rounded" (click)="btnAddCity(cityForm.value)">Add City</button>
+                            <button class="overlay-btn rounded" (click)="btnAddCity(city_form.value)">Add City</button>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 <div fxLayout="row wrap" fxLayoutGap="55px grid">
     <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let weather of weather_data_list">
-        <mat-card class="weather-card" appRandomColor>
-        <!-- <mat-card class="weather-card" [style]="{'background-color': getRandomColor()}"> -->
+        <mat-card class="weather-card" appRandomColor (click)="popUpCity(weather.city)">
+            <!-- <mat-card class="weather-card" [style]="{'background-color': getRandomColor()}"> -->
             <i class="close-icon fa fa-times-thin" aria-hidden="true"></i>
             <mat-card-header>
                 <div class="flex-row">

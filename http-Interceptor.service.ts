@@ -36,16 +36,16 @@ export class HttpInterceptorService implements HttpInterceptor {
                 }
                 else {
                     console.error("Other Errors");
-                    Swal.fire('Ops!', 'Something went wrong!', 'error');
+                    Swal.fire(error.status.toString(), 'Something went wrong! ' + error.status.toString() + '-' + error.statusText, 'error');
                 }
 
                 if (handled) {
                     console.log('Display Error Message');
-                    Swal.fire('Ops!', 'Something went wrong!', 'error');
+                    Swal.fire(error.status.toString(), 'Something went wrong! ' + error.status.toString() + '-' + error.statusText, 'error');
                     return of(error);
                 } else {
                     console.log('Unhandled Error');
-                    Swal.fire('Ops!', 'Something went wrong!', 'error');
+                    Swal.fire(error.status.toString(), 'Something went wrong! ' + error.status.toString() + '-' + error.statusText, 'error');
                     return throwError(error);
                 }
             })

@@ -5,9 +5,9 @@ import { environment } from '../../environments/environment';
 import { Observable, of, throwError, interval, timer, Subject } from 'rxjs';
 import { tap, map, publishReplay, refCount, catchError, finalize, switchMap, takeUntil, shareReplay } from 'rxjs/operators';
 
-let serviceUrl: String = 'http://api.openweathermap.org/data/2.5/group';
-let cityServiceUrl: String = 'http://api.openweathermap.org/data/2.5/weather';
-let apiKey: String = environment.API_URL;
+let service_url: String = 'http://api.openweathermap.org/data/2.5/group';
+let city_service_url: String = 'http://api.openweathermap.org/data/2.5/weather';
+let api_key: String = environment.API_URL;
 
 const REFRESH_INTERVAL = 10000;
 const CACHE_SIZE = 1;
@@ -23,8 +23,9 @@ export interface City {
 })
 export class WeatherService {
 
-  response: any[] = [];
-  apiUrl: string[] = [];
+  city_list: any[] = [];
+  cache_responses: any[] = [];
+  api_url: string[] = [];
   cities!: Observable<Array<any>>;
 
   private cache$?: Observable<Array<City>>;
@@ -36,28 +37,57 @@ export class WeatherService {
 
   getWeatherData(city_ids: number[]) {
 
-    // return this.http.get(serviceUrl + '?id=' + city_ids + '&units=metric' + '&APPID=' + apiKey);
-    var apiUrl = serviceUrl + '?id=' + city_ids + '&units=metric' + '&APPID=' + apiKey;
-    const http$ = this.http.get<any>(apiUrl);
+    var city_list;
+    var api_url = service_url + '?id=' + city_ids + '&units=metric' + '&APPID=' + api_key;
+    console.log("Getting weather data for cities");
 
-    http$
+    //#region Comments
+    // if (this.api_url.includes(api_url)) {
+    //   city_list = this.city_list.find(x => x.api_url == api_url).city_list;
+    //   console.log("Came from Cache", city_list);
+    // }
+    // else {
+
+    //   city_list = this.http.get<any>(api_url)
+    //     .pipe(
+    //       shareReplay(),
+    //       catchError((err) => {
+    //         console.log('error caught in service - ', err)
+    //         console.error(err);
+    //         return throwError(err);
+    //       })
+    //     );
+    //   this.api_url.push(api_url); // cache url
+    //   var city_list_obj = {
+    //     api_url: api_url,
+    //     city_list: city_list
+    //   }
+
+    //   this.city_list.push(city_list_obj); // cache data
+    // }
+    //#endregion
+
+    city_list = this.http.get<any>(api_url)
       .pipe(
+        shareReplay(),
         catchError((err) => {
           console.log('error caught in service - ', err)
           console.error(err);
           return throwError(err);
         })
-      )
+      );
 
-    return http$;
+    console.log("City List", city_list);
+
+    return city_list;
 
   }
 
   // Clear configs
   clearCache() {
     var clear = setTimeout(() => {
-      this.apiUrl = [];
-      this.response = [];
+      this.api_url = [];
+      this.cache_responses = [];
     }, 15000);
   }
 
@@ -66,35 +96,10 @@ export class WeatherService {
   }
 
   getWeatherByCityNew(city_name: String): Observable<Array<any>> {
-    var apiUrl = cityServiceUrl + '?q=' + city_name + '&appid=' + apiKey;
+    var api_url = city_service_url + '?q=' + city_name + '&appid=' + api_key;
 
     if (!this.cities) {
-      // this.cities = timer(0, 15000)
-      //   .pipe(
-      //     switchMap(() => {
-      //       if (this.apiUrl.includes(apiUrl)) {
-      //         console.log("Sending cached data");
-      //         return this.cities
-      //       }
-      //       else {
-      //         console.log('REQUESTING DATA....');
-      //         var city_details = this.http.get<any>(apiUrl).pipe(
-      //           catchError((err) => {
-      //             console.log('error caught in service - ', err)
-      //             console.error(err);
-      //             return throwError(err);
-      //           })
-      //         );
-      //         console.log('City Details', city_details);
-      //         return city_details;
-      //       }
-      //     }),
-      //     map((response) => response),
-      //     publishReplay(1),
-      //     refCount()
-      //   )
-
-      this.cities = this.http.get<any>(apiUrl)
+      this.cities = this.http.get<any>(api_url)
         .pipe(
           map((response) => response),
           publishReplay(1),
@@ -106,34 +111,45 @@ export class WeatherService {
   }
 
   getWeatherByCity(city_name: String) {
-    // return this.http.get(cityServiceUrl + '?q=' + city_name + '&appid=' + apiKey);
+    // return this.http.get(city_service_url + '?q=' + city_name + '&appid=' + api_key);
 
-    var response;
-    var apiUrl = cityServiceUrl + '?q=' + city_name + '&appid=' + apiKey;
-    if (this.apiUrl.includes(apiUrl)) {
-      response = this.response.find(x => x.city_name == city_name).response;
-      console.log("Came from Cache", response);
-    }
-    else {
-      response = this.http.get<any>(apiUrl)
-        .pipe(
-          shareReplay(),
-          catchError((err) => {
-            console.log('error caught in service - ', err)
-            console.error(err);
-            return throwError(err);
-          })
-        );
-      this.apiUrl.push(apiUrl); // cache url
-      var responseObj = {
-        city_name: city_name,
-        response: response
-      }
+    var city_detail;
+    var api_url = city_service_url + '?q=' + city_name.toLowerCase() + '&appid=' + api_key;
+    // if (this.api_url.includes(api_url)) {
+    //   city_detail = this.cache_responses.find(x => x.city_name == city_name).response;
+    //   console.log("Came from Cache", city_detail);
+    // }
+    // else {
+    //   city_detail = this.http.get<any>(api_url)
+    //     .pipe(
+    //       shareReplay(),
+    //       catchError((err) => {
+    //         console.log('error caught in service - ', err)
+    //         console.error(err);
+    //         return throwError(err);
+    //       })
+    //     );
+    //   this.api_url.push(api_url); // cache url
+    //   var cache_response = {
+    //     city_name: city_name,
+    //     response: city_detail
+    //   }
 
-      this.response.push(responseObj); // cache data
-      console.log("Came from Server", this.response);
-    }
-    return response;
+    //   this.cache_responses.push(cache_response); // cache data
+    //   console.log("Came from Server", this.cache_responses);
+    // }
+
+    city_detail = this.http.get<any>(api_url)
+      .pipe(
+        shareReplay(),
+        catchError((err) => {
+          console.log('error caught in service - ', err)
+          console.error(err);
+          return throwError(err);
+        })
+      );
+
+    return city_detail;
   }
 
   getCityWeatherDetails(city_name: String) {
@@ -164,9 +180,8 @@ export class WeatherService {
   }
 
   requestCityDetail(city_name: String) {
-    // console.log("Helper city_name", city_name);
-    var apiUrl = cityServiceUrl + '?q=' + city_name + '&appid=' + apiKey;
-    return this.http.get<any>(apiUrl).pipe(
+    var api_url = city_service_url + '?q=' + city_name + '&appid=' + api_key;
+    return this.http.get<any>(api_url).pipe(
       map(response => response)
     );
   }
