@@ -39,7 +39,7 @@ export class WeatherService {
 
     var city_list;
     var api_url = service_url + '?id=' + city_ids + '&units=metric' + '&APPID=' + api_key;
-    console.log("Getting weather data for cities");
+    // console.log("Getting weather data for cities");
 
     //#region Comments
     // if (this.api_url.includes(api_url)) {
@@ -77,7 +77,7 @@ export class WeatherService {
         })
       );
 
-    console.log("City List", city_list);
+    // console.log("City List", city_list);
 
     return city_list;
 

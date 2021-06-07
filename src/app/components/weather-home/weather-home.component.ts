@@ -57,7 +57,7 @@ export class WeatherHomeComponent implements OnInit {
       .subscribe(
         (response: any) => {
           var data = response.list;
-          console.log("City Data Set", data);
+          // console.log("City Data Set", data);
           data.forEach((element: any) => {
             var date = new Date();
             var time = formatDate(date, 'hh:mm a', 'en-US');
@@ -102,7 +102,7 @@ export class WeatherHomeComponent implements OnInit {
   }
 
   btnAddCity(data: any) {
-    console.log("Form Data", data);
+    // console.log("Form Data", data);
     const dialogRef = this.dialog.open(WeatherCityComponent, { width: '40%', data: data.city, disableClose: true });
   }
 }

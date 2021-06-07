@@ -17,7 +17,7 @@ export class WeatherCardComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
   ) {
-    console.log("Weather Data On Weather Card", this.weather_data_list);
+    // console.log("Weather Data On Weather Card", this.weather_data_list);
   }
 
   getRandomColor() {
@@ -31,7 +31,7 @@ export class WeatherCardComponent implements OnInit {
   }
 
   popUpCity(city: string) {
-    console.log("Form Data", city);
+    // console.log("Form Data", city);
     const dialogRef = this.dialog.open(WeatherCityComponent, { width: '40%', data: city, disableClose: true });
   }
 

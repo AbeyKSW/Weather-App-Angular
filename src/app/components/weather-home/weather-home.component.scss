@@ -1,61 +1,70 @@
 .container {
-    height: 1000px;
-    color: white;
-    // display: flex;
-    // flex-direction: column;
-    // position: absolute;
-    background-color: #1F2128;
-    background-repeat: no-repeat;
-    background-image: url("../../../assets/systemImages/background_001.png");
+  height: 1000px;
+  color: white;
+  // display: flex;
+  // flex-direction: column;
+  // position: absolute;
+  background-color: #1f2128;
+  background-repeat: no-repeat;
+  background-image: url("../../../assets/systemImages/background_001.png");
 }
 
-.custom-input{
-    color: white;
-    height: 25px;
-    width: 200px;
-    border-color: #191B20;
-    border-radius: 0.5rem;
-    background-color: #191B20;
+.custom-input {
+  color: white;
+  height: 25px;
+  width: 200px;
+  border: 0px;
+  padding-left: 0.5rem;
+  border-radius: 0.3rem;
+  background-color: #191b20;
 }
 
 .logo-container {
-    height: 20px;
-    text-align: center;
+  height: 20px;
+  text-align: center;
 }
 
 .logo {
-    width: 150px;
-    margin-top: 15px;
+  width: 150px;
+  margin-top: 15px;
 }
 
 .form-container {
-    margin-top: 50px;
-    text-align: center;
+  margin-top: 50px;
+  text-align: center;
 }
 
 .overlay-btn {
-    background-color: #4F449A;
-    border-color: #4F449A;
-    height: 30px;
-    border-radius: 0.5rem;
-    margin-left: -2%;
+  background-color: #4f449a;
+  border-color: #4f449a;
+  height: 27px;
+  border: 0px;
+  border-radius: 0.3rem;
+  color: white;
+//   font-size: 0.75rem;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  //   border-top-right-radius: 0.5rem;
+  //   border-bottom-right-radius: 0.5rem;
+//   margin-left: -1%;
 }
 
 .card-container {
-    text-align: center;
-    justify-content: center;
-    margin-top: 2%;
-    padding-left: 28%;
-    padding-right: 28%;
+  text-align: center;
+  justify-content: center;
+  margin-top: 2%;
+  padding-left: 28%;
+  padding-right: 28%;
 }
 
 .mat-dialog-container {
-    padding: 0px !important;
+  padding: 0px !important;
 }
 
-.footer{
-    color: white;
-    text-align: center;
-    background-color: #30333D;
-    padding: 1%;
+.footer {
+  color: white;
+  text-align: center;
+  background-color: #30333d;
+  padding: 1%;
 }

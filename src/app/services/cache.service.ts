@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpRequest, HttpResponse, HttpInterceptor, HttpHandler, HttpEvent } from '@angular/common/http';
+import {
+  HttpRequest,
+  HttpResponse,
+  HttpInterceptor,
+  HttpHandler,
+  HttpEvent,
+} from '@angular/common/http';
 
 abstract class HttpCache {
   abstract get(req: HttpRequest<any>): HttpResponse<any> | null;
@@ -8,33 +14,42 @@ abstract class HttpCache {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CacheService implements HttpCache {
-
   private cache: any = {};
 
-  constructor() { }
+  constructor() {}
 
   get(req: HttpRequest<any>): HttpResponse<any> | null {
-
+    const now = new Date();
     var req_url = req.urlWithParams;
     var row_data = localStorage.getItem(req_url);
 
-    // This is the code for getting data from local storage. When this open this passes the data to the cache-interceptor correctly.
-    // if (row_data) {
-    //   var data = JSON.parse(localStorage.getItem(req_url) || '{}');
-    //   this.cache[req_url] = data == {} ? null : data;
-    //   console.log("Cached Data from Local Storage", data);
-    //   console.log("Cached Data from this.cache", this.cache[req_url]);
-    // }
+    if (!row_data) {
+      return null;
+    }
 
+    const item = JSON.parse(row_data);
+
+    if (now.getTime() > item.expiry) {
+      console.log("Expired");
+      localStorage.removeItem(req_url);
+      return null;
+    }
+
+    this.cache[req_url] = item.value == {} ? null : item.value;
     return this.cache[req_url];
   }
 
   put(req: HttpRequest<any>, respond: HttpResponse<any>): void {
-    console.log("Cached Data 232");
+    const now = new Date();
+    const CACHE_EXP_TIME = 1000 * 60; // * 5
     this.cache[req.urlWithParams] = respond;
-    localStorage.setItem(req.urlWithParams, JSON.stringify(respond));
+    const item = {
+      value: respond, //original value
+      expiry: now.getTime() + CACHE_EXP_TIME, //the time when it's supposed to expire
+    };
+    localStorage.setItem(req.urlWithParams, JSON.stringify(item));
   }
 }
